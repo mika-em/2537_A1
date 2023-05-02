@@ -221,7 +221,7 @@ app.get("/members", async (req, res) => {
     const imageName = `00${randomImageNumber}.jpg`;
 
     const html = `
-    <p>Hello, ${name}. ╮ (. ❛ ᴗ ❛.) ╭ </p>
+    <p>Hello, ${name} ╮ (. ❛ ᴗ ❛.) ╭ </p>
     <div>
     <img src="${imageName}" style="width:250px;"/>
     </div>
