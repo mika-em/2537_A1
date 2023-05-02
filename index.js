@@ -217,7 +217,7 @@ app.post("/loggingin", async (req, res) => {
 app.get("/members", async (req, res) => {
     const name = req.session.user.name;
 
-    const randomImageNumber = Math.floor(Math.random() * 3);
+    const randomImageNumber = Math.floor(Math.random() * 3) + 1;
     const imageName = `00${randomImageNumber}.jpg`;
 
 
