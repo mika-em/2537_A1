@@ -223,10 +223,10 @@ app.get("/members", async (req, res) => {
     const html = `
     <p>Hello, ${name}.</p>
     <div>
-        <a href="/">Logout</a>
+    <img src="${imageName}" style="width:250px;"/>
     </div>
     <div>
-        <img src="${imageName}" style="width:250px;"/>
+        <a href="/">Logout</a>
     </div>
     `;
     res.send(html);
