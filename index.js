@@ -138,7 +138,7 @@ app.post("/submitUser", async (req, res) => {
     });
 
     //print out that user was inserted
-    console.log(`User ${name} was inserted`);
+    console.log(`User ${name} was inserted ╮ (. ❛ ᴗ ❛.) ╭ `);
 
 
     req.session.user = {
@@ -221,7 +221,7 @@ app.get("/members", async (req, res) => {
     const imageName = `00${randomImageNumber}.jpg`;
 
     const html = `
-    <p>Hello, ${name}.</p>
+    <p>Hello, ${name}. ╮ (. ❛ ᴗ ❛.) ╭ </p>
     <div>
     <img src="${imageName}" style="width:250px;"/>
     </div>
