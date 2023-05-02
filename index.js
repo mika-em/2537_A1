@@ -218,7 +218,7 @@ app.get("/members", async (req, res) => {
     const name = req.session.user.name;
 
     const randomImageNumber = Math.floor(Math.random() * 3) + 1;
-    const imageName = `00${randomImageNumber}.jpg`;
+    const imageName = `${randomImageNumber.toString().padStart(3, '0')}.jpg`;
 
     const html = `
     <p>Hello, ${name}  ╮(. ❛ ᴗ ❛.) ╭ </p>
