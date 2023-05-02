@@ -217,8 +217,9 @@ app.post("/loggingin", async (req, res) => {
 app.get("/members", async (req, res) => {
     const name = req.session.user.name;
 
-    const randomImageNumber = Math.floor(Math.random() * 3) + 1;
-    const imageName = `${randomImageNumber.toString().padStart(3, '0')}.jpg`;
+    const randomImageNumber = Math.floor(Math.random() * 3);
+    const imageName = `00${randomImageNumber}.jpg`;
+
 
     const html = `
     <p>Hello, ${name}  ╮(. ❛ ᴗ ❛.) ╭ </p>
@@ -271,7 +272,7 @@ const protectedRouteForAdminsOnlyMiddlewareFunction = async (req, res, next) => 
         if (result?.type != 'administrator') {
             return res.send('<h1> You are not an admin </h1>')
         }
-        next(); 
+        next();
     } catch (error) {
         console.log(error);
     }
