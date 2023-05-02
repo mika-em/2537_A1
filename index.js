@@ -163,7 +163,6 @@ app.get("/login", (req, res) => {
     res.send(html);
 });
 
-
 app.post("/loggingin", async (req, res) => {
     const {
         email,
@@ -179,12 +178,12 @@ app.post("/loggingin", async (req, res) => {
         `);
     }
 
-
     const result = await userCollection.find({
         email: email
     }).project({
         email: 1,
         password: 1,
+        name: 1,
         _id: 1
     }).toArray();
 
@@ -199,7 +198,9 @@ app.post("/loggingin", async (req, res) => {
     if (await bcrypt.compare(password, result[0].password)) {
         console.log("correct password");
         req.session.authenticated = true;
-        req.session.email = email;
+        req.session.user = {
+            name: result[0].name
+        };
         req.session.cookie.maxAge = expireTime;
 
         res.redirect('/members');
@@ -217,11 +218,12 @@ app.post("/loggingin", async (req, res) => {
 // Middleware function to check if the session exists
 const requireLogin = (req, res, next) => {
     if (req.session && req.session.user) {
-        return next();
+        next();
     } else {
         return res.send(`Please <a href="/login">log in</a> first ╮(. ❛ ᴗ ❛.) ╭`);
     }
 }
+
 
 // Route for the members page
 app.get('/members', requireLogin, async (req, res) => {
