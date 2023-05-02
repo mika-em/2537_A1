@@ -214,17 +214,26 @@ app.post("/loggingin", async (req, res) => {
 
 
 
-app.get("/members", async (req, res) => {
+// Middleware function to check if the session exists
+const requireLogin = (req, res, next) => {
+    if (req.session && req.session.user) {
+        return next();
+    } else {
+        return res.send(`Please <a href="/login">log in</a> first ╮(. ❛ ᴗ ❛.) ╭`);
+    }
+}
+
+// Route for the members page
+app.get('/members', requireLogin, async (req, res) => {
     const name = req.session.user.name;
 
     const randomImageNumber = Math.floor(Math.random() * 3) + 1;
     const imageName = `00${randomImageNumber}.jpg`;
 
-
     const html = `
     <p>Hello, ${name}  ╮(. ❛ ᴗ ❛.) ╭ </p>
     <div>
-    <img src="${imageName}" style="width:250px;"/>
+        <img src="${imageName}" style="width:250px;"/>
     </div>
     <div>
         <a href="/logout">Logout</a>
@@ -232,6 +241,7 @@ app.get("/members", async (req, res) => {
     `;
     res.send(html);
 });
+
 
 
 app.post("/login", (req, res) => {
