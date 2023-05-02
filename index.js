@@ -6,6 +6,7 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const bcrypt = require('bcrypt');
 const saltRounds = 12;
+const usersModel = require('./models/w1users');
 
 const port = process.env.PORT || 3000;
 // this line says that if this var (PORT) is defined, default to using 3000
@@ -274,28 +275,27 @@ app.get('/logout', (req, res) => {
 });
 
 
-const protectedRouteForAdminsOnlyMiddlewareFunction = async (req, res, next) => {
-    try {
-        const result = await usersModel.findOne({
-            username: req.session.loggedUsername
-        })
-        if (result?.type != 'administrator') {
-            return res.send('<h1> You are not an admin </h1>')
-        }
-        next();
-    } catch (error) {
-        console.log(error);
-    }
-};
-app.use(protectedRouteForAdminsOnlyMiddlewareFunction);
+// const protectedRouteForAdminsOnlyMiddlewareFunction = async (req, res, next) => {
+//     try {
+//         const result = await usersModel.findOne({
+//             username: req.session.loggedUsername
+//         })
+//         if (result?.type != 'administrator') {
+//             return res.send('<h1> You are not an admin </h1>')
+//         }
+//         next();
+//     } catch (error) {
+//         console.log(error);
+//     }
+// };
+// app.use(protectedRouteForAdminsOnlyMiddlewareFunction);
 
-app.get('/protectedRouteForAdminsOnly', (req, res) => {
-    res.send('<h1> protectedRouteForAdminsOnly </h1>');
-});
+// app.get('/protectedRouteForAdminsOnly', (req, res) => {
+//     res.send('<h1> protectedRouteForAdminsOnly </h1>');
+// });
 
-app.get("*", (req, res) => {
-    res.status(404);
-    res.send("Page not found - 404");
+app.get('*', (req, res) => {
+    res.status(404).send('<p> 404: Page not found (╯°□°)╯︵ ┻━┻ </p>');
 });
 
 app.listen(port, () => {
