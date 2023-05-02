@@ -227,7 +227,7 @@ app.get("/members", async (req, res) => {
     <img src="${imageName}" style="width:250px;"/>
     </div>
     <div>
-        <a href="/">Logout</a>
+        <a href="/logout">Logout</a>
     </div>
     `;
     res.send(html);
@@ -250,17 +250,15 @@ app.post("/login", (req, res) => {
     res.send(html);
 });
 
-
-
-
 app.get('/logout', (req, res) => {
-    req.session.destroy();
-    var html = `
-    You are logged out.
-    <div>
-        <a href="/">Home</a>
-    `;
-    res.send(html);
+    req.session.destroy((err) => {
+        if (err) {
+            console.error(err);
+        } else {
+            console.log('Session deleted from database.');
+        }
+        res.redirect('/');
+    });
 });
 
 
