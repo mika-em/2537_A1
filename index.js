@@ -8,7 +8,7 @@ const bcrypt = require('bcrypt');
 const saltRounds = 12;
 const usersModel = require('./models/w1users');
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3003;
 // this line says that if this var (PORT) is defined, default to using 3000
 // this is useful for when we host in hosting sites , which will set the PORT var for us
 
