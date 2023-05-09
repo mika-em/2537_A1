@@ -1,17 +1,18 @@
 <%- include('templates/header')  %>
 <div>Users:</div>
 <ul>
+
     <% for(let i=0; i < users.length; i++) { %>
     <li>
         <%- include('templates/user', {user: users[i]})  %>
         <form action="/promoteToAdmin" method="POST">
-            <input type="hidden" name="userId" value="<%= users[i].id %>">
-            <button type="button sumbit" class="btn btn-light type=" submit">Promote to Admin</button>
+            <input type="hidden" value="<%= users[i].id %>">
+            <button type="submit" class="btn btn-light">Promote to Admin</button>
         </form>
         <br>
         <form action="/demoteToUser" method="POST">
-            <input type="hidden" name="userId" value="<%= users[i].id %>">
-            <button type="button sumbit" class="btn btn-light type=" submit">Demote to User</button>
+            <input type="hidden" value="<%= users[i].id %>">
+            <button type="submit" class="btn btn-light">Demote to User</button>
         </form>
     </li>
     <% } %>

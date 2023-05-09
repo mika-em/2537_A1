@@ -228,6 +228,7 @@ app.get('/members', requireLogin, async (req, res) => {
 
     console.log(req.session);
     res.render('members', {
+
         name: name,
     });
 });
@@ -303,7 +304,6 @@ app.post('/promoteToAdmin', sessionValidation, adminAuthorization, async (req, r
         return res.status(400).send('User already promoted');
     } else {
         console.log("User promoted");
-
 
         return res.redirect('/admin');
     }
