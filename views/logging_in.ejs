@@ -1,4 +1,17 @@
 <%- include("templates/header") %>
+<h2>Login</h2>
+<form action="/loggingin" method="post">
+    <label for="email">Email:</label>
+    <input type="text" id="email" name="email"><br>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password">
+    <br>
+    <br>
+
+    <button type="submit button" class="btn btn-light">Submit</button>
+</form>
+
+
 <body class="text-center">
     <form class="form-signin" action="/loggingin" method="post">
         <h1>Welcome.</h1>
