@@ -1,0 +1,21 @@
+<%- include("templates/header") %>
+<body class="text-center">
+    <form class="form-signin" action="/loggingin" method="post">
+        <h1>Welcome.</h1>
+        <br>
+        <br>
+        <br>
+        <h5 class="h3 mb-3 font-weight-normal">Please sign in</h5>
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" class="form-control" placeholder="Email address" required autofocus>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" value="remember-me"> Remember me
+            </label>
+        </div>
+        <button type="submit button" class="btn btn-light">Submit</button>
+    </form>
+</body>
+<%- include("templates/footer") %>
