@@ -285,6 +285,31 @@ app.post('/demoteToUser', sessionValidation, adminAuthorization, async (req, res
     }
 });
 
+app.post('/promoteToAdmin', sessionValidation, adminAuthorization, async (req, res) => {
+    const name = req.session.user.name;
+    const result = await userCollection.updateOne({
+        name: name
+    }, {
+        $set: {
+            user_type: 'admin'
+        }
+    });
+
+    if (result.matchedCount === 0) {
+        return res.status(404).send('User not found');
+    }
+
+    if (result.modifiedCount === 0) {
+        return res.status(400).send('User already promoted');
+    } else {
+        console.log("User promoted");
+
+
+        return res.redirect('/admin');
+    }
+});
+
+
 
 app.use(express.static(__dirname + "/public"));
 
