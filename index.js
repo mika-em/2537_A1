@@ -261,54 +261,36 @@ app.get('/admin', sessionValidation, adminAuthorization, async (req, res) => {
 });
 
 
+app.post("/promoteToAdmin", async (req, res) => {
 
-
-app.post('/demoteToUser', sessionValidation, adminAuthorization, async (req, res) => {
-    const name = req.session.user.name;
-    const result = await userCollection.updateOne({
+    const name = req.body.name;
+    console.log(name);
+    // console.log(req.body);
+    await userCollection.updateOne({
         name: name
     }, {
         $set: {
-            user_type: 'user'
+            user_type: "admin"
         }
     });
-
-    if (result.matchedCount === 0) {
-        return res.status(404).send('User not found');
-    }
-
-    if (result.modifiedCount === 0) {
-        return res.status(400).send('User already demoted');
-    } else {
-        console.log("User demoted");
-
-        return res.redirect('/admin');
-    }
+    console.log("User promoted");
+    res.redirect("/admin");
 });
 
-app.post('/promoteToAdmin', sessionValidation, adminAuthorization, async (req, res) => {
-    const name = req.session.user.name;
-    const result = await userCollection.updateOne({
+app.post("/demoteToUser", async (req, res) => {
+    const name = req.body.name;
+    // console.log(req.body);
+    console.log(name);
+    await userCollection.updateOne({
         name: name
     }, {
         $set: {
-            user_type: 'admin'
+            user_type: "user"
         }
     });
-
-    if (result.matchedCount === 0) {
-        return res.status(404).send('User not found');
-    }
-
-    if (result.modifiedCount === 0) {
-        return res.status(400).send('User already promoted');
-    } else {
-        console.log("User promoted");
-
-        return res.redirect('/admin');
-    }
+    console.log("User demoted");
+    res.redirect("/admin");
 });
-
 
 
 app.use(express.static(__dirname + "/public"));
